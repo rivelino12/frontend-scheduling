@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { LoginUser, reset } from "../features/authSlice";
+import LogoKodeKiddo from "../assets/logo_kodekiddo.png";
+import ToastError from "./toast/ToastError";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -25,52 +27,42 @@ const Login = () => {
   };
 
   return (
-    <section className="hero is-fullheight is-fullwidth">
-      <div className="hero-body">
-        <div className="container">
-          <div className="columns is-centered">
-            <div className="column is-4">
-              <form onSubmit={Auth} className="box">
-                {isError && <p className="has-text-centered">{message}</p>}
-                <h1 className="title is-2">Sign In</h1>
-                <div className="field">
-                  <label className="label">Email</label>
-                  <div className="control">
-                    <input
-                      type="text"
-                      className="input"
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                      placeholder="Email"
-                    />
-                  </div>
-                </div>
-                <div className="field">
-                  <label className="label">Password</label>
-                  <div className="control">
-                    <input
-                      type="password"
-                      className="input"
-                      value={password}
-                      onChange={(e) => setPassword(e.target.value)}
-                      placeholder="******"
-                    />
-                  </div>
-                </div>
-                <div className="field mt-5">
-                  <button
-                    type="submit"
-                    className="button is-success is-fullwidth"
-                  >
-                    {isLoading ? "Loading..." : "Login"}
-                  </button>
-                </div>
-              </form>
+    <>
+      <div className="flex flex-col justify-center min-h-screen bg-gray-100 sm:py-12">
+        {isError && <ToastError message={message} />}
+        <div className="p-10 mx-auto xs:p-0 md:w-full md:max-w-md">
+          <form
+            onSubmit={Auth}
+            className="w-full bg-white divide-y divide-gray-200 rounded-lg shadow"
+          >
+            <div className="flex items-center justify-center">
+              <img src={LogoKodeKiddo} alt="Logo" />
             </div>
-          </div>
+            <div className="px-5 py-7">
+              <label className="label">Email</label>
+              <input
+                type="text"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="example@gmail.com"
+                className="w-full input input-bordered"
+              />
+              <label className="label">Kata Sandi</label>
+              <input
+                type="text"
+                className="w-full input input-bordered"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder="******"
+              />
+              <button type="submit" className="w-full mt-6 btn btn-primary">
+                Masuk
+              </button>
+            </div>
+          </form>
         </div>
       </div>
-    </section>
+    </>
   );
 };
 

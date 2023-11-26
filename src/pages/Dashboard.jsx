@@ -1,14 +1,15 @@
 import React, { useEffect } from "react";
-import Layout from "./Layout";
-import Welcome from "../components/Welcome";
+import DefaultLayout from "../layout/DefaultLayout";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { getMe } from "../features/authSlice";
+import DashboardParent from "./dashboard/DashboardParent";
+import DashboardTeacher from "./dashboard/DashboardTeacher";
 
 const Dashboard = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { isError } = useSelector((state) => state.auth);
+  const { isError, user } = useSelector((state) => state.auth);
 
   useEffect(() => {
     dispatch(getMe());
@@ -21,9 +22,10 @@ const Dashboard = () => {
   }, [isError, navigate]);
 
   return (
-    <Layout>
-      <Welcome />
-    </Layout>
+    <DefaultLayout>
+      {user && user.role === "admin" && <DashboardTeacher />}
+      {user && user.role === "parent" && <DashboardParent />}
+    </DefaultLayout>
   );
 };
 

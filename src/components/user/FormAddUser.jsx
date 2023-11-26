@@ -1,44 +1,26 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import axios from "axios";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
-const FormEditUser = () => {
+const FormAddUser = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confPassword, setConfPassword] = useState("");
-  const [role, setRole] = useState("");
   const [msg, setMsg] = useState("");
   const navigate = useNavigate();
-  const { id } = useParams();
 
-  useEffect(() => {
-    const getUserById = async () => {
-      try {
-        const response = await axios.get(`http://localhost:5000/users/${id}`);
-        setName(response.data.name);
-        setEmail(response.data.email);
-        setRole(response.data.role);
-      } catch (error) {
-        if (error.response) {
-          setMsg(error.response.data.msg);
-        }
-      }
-    };
-    getUserById();
-  }, [id]);
-
-  const updateUser = async (e) => {
+  const saveUser = async (e) => {
     e.preventDefault();
     try {
-      await axios.patch(`http://localhost:5000/users/${id}`, {
+      await axios.post("http://localhost:5000/user", {
         name: name,
         email: email,
         password: password,
         confPassword: confPassword,
-        role: role,
+        role: "parent",
       });
-      navigate("/users");
+      navigate("/parents");
     } catch (error) {
       if (error.response) {
         setMsg(error.response.data.msg);
@@ -47,82 +29,64 @@ const FormEditUser = () => {
   };
   return (
     <div>
-      <h1 className="title">Users</h1>
-      <h2 className="subtitle">Update User</h2>
+      <h2 className="text-2xl font-bold">Tambah Orang Tua</h2>
       <div className="card is-shadowless">
         <div className="card-content">
           <div className="content">
-            <form onSubmit={updateUser}>
+            <form onSubmit={saveUser}>
               <p className="has-text-centered">{msg}</p>
-              <div className="field">
+              <div>
                 <label className="label">Name</label>
                 <div className="control">
                   <input
                     type="text"
-                    className="input"
+                    className="w-1/2 input input-bordered"
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                     placeholder="Name"
                   />
                 </div>
               </div>
-              <div className="field">
+              <div>
                 <label className="label">Email</label>
                 <div className="control">
                   <input
                     type="text"
-                    className="input"
+                    className="w-1/2 input input-bordered"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="Email"
                   />
                 </div>
               </div>
-              <div className="field">
-                <label className="label">Password</label>
+              <div>
+                <label className="label">Kata Sandi</label>
                 <div className="control">
                   <input
                     type="password"
-                    className="input"
+                    className="w-1/2 input input-bordered"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     placeholder="******"
                   />
                 </div>
               </div>
-              <div className="field">
-                <label className="label">Confirm Password</label>
+              <div>
+                <label className="label">Konfirmasi Kata Sandi</label>
                 <div className="control">
                   <input
                     type="password"
-                    className="input"
+                    className="w-1/2 input input-bordered"
                     value={confPassword}
                     onChange={(e) => setConfPassword(e.target.value)}
                     placeholder="******"
                   />
                 </div>
               </div>
-              <div className="field">
-                <label className="label">Role</label>
-                <div className="control">
-                  <div className="select is-fullwidth">
-                    <select
-                      value={role}
-                      onChange={(e) => setRole(e.target.value)}
-                    >
-                      <option value="admin">Admin</option>
-                      <option value="user">User</option>
-                    </select>
-                  </div>
-                </div>
-              </div>
-              <div className="field">
-                <div className="control">
-                  <button type="submit" className="button is-success">
-                    Update
-                  </button>
-                </div>
-              </div>
+
+              <button type="submit" className="mt-6 btn btn-primary">
+                Simpan
+              </button>
             </form>
           </div>
         </div>
@@ -131,4 +95,4 @@ const FormEditUser = () => {
   );
 };
 
-export default FormEditUser;
+export default FormAddUser;

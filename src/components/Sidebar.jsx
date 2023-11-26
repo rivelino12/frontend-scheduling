@@ -16,39 +16,54 @@ const Sidebar = () => {
   };
 
   return (
-    <div>
-      <aside className="menu pl-2 has-shadow">
-        <p className="menu-label">General</p>
-        <ul className="menu-list">
+    <div className="h-screen">
+      <aside className="p-4 bg-gray-200 shadow-md">
+        <p className="mb-2 text-lg font-bold">General</p>
+        <ul className="pl-4 mb-4 list-disc">
           <li>
-            <NavLink to={"/dashboard"}>
-              <IoHome /> Dashboard
+            <NavLink
+              to="/dashboard"
+              activeClassName="text-blue-500"
+              className="hover:text-blue-500"
+            >
+              <IoHome className="inline-block mr-2" /> Dashboard
             </NavLink>
           </li>
           <li>
-            <NavLink to={"/products"}>
-              <IoPricetag /> Products
+            <NavLink
+              to="/products"
+              activeClassName="text-blue-500"
+              className="hover:text-blue-500"
+            >
+              <IoPricetag className="inline-block mr-2" /> Products
             </NavLink>
           </li>
         </ul>
         {user && user.role === "admin" && (
           <div>
-            <p className="menu-label">Admin</p>
-            <ul className="menu-list">
+            <p className="mb-2 text-lg font-bold">Admin</p>
+            <ul className="pl-4 mb-4 list-disc">
               <li>
-                <NavLink to={"/users"}>
-                  <IoPerson /> Users
+                <NavLink
+                  to="/users"
+                  activeClassName="text-blue-500"
+                  className="hover:text-blue-500"
+                >
+                  <IoPerson className="inline-block mr-2" /> Users
                 </NavLink>
               </li>
             </ul>
           </div>
         )}
 
-        <p className="menu-label">Settings</p>
-        <ul className="menu-list">
+        <p className="mb-2 text-lg font-bold">Settings</p>
+        <ul className="pl-4 list-disc">
           <li>
-            <button onClick={logout} className="button is-white">
-              <IoLogOut /> Logout
+            <button
+              onClick={logout}
+              className="px-4 py-2 text-white bg-red-500 rounded"
+            >
+              <IoLogOut className="inline-block mr-2" /> Logout
             </button>
           </li>
         </ul>

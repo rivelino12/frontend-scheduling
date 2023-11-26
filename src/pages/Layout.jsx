@@ -4,9 +4,9 @@ import Sidebar from "../components/Sidebar";
 
 const Layout = ({ children }) => {
   return (
-    <React.Fragment>
+    <>
       <Navbar />
-      <div className="columns mt-6" style={{ minHeight: "100vh" }}>
+      <div className="flex mt-6 fle" style={{ minHeight: "100vh" }}>
         <div className="column is-2">
           <Sidebar />
         </div>
@@ -14,7 +14,7 @@ const Layout = ({ children }) => {
           <main>{children}</main>
         </div>
       </div>
-    </React.Fragment>
+    </>
   );
 };
 
