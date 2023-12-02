@@ -25,7 +25,7 @@ const AddSchedule = () => {
   const fetchStudents = async () => {
     try {
       const response = await axios.get("http://localhost:5000/students");
-      setStudents(response.data);
+      setStudents(response.data.result);
       console.log(response.data);
     } catch (error) {
       console.log(error);

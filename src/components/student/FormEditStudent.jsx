@@ -21,7 +21,7 @@ const FormEditStudent = () => {
   const fetchParents = async () => {
     try {
       const response = await axios.get("http://localhost:5000/users");
-      setParents(response.data);
+      setParents(response.data.result);
     } catch (error) {
       console.error("Error fetching parents:", error);
     }
@@ -117,7 +117,7 @@ const FormEditStudent = () => {
                 </select>
               </div>
 
-              <button type="submit" className="btn btn-primary">
+              <button type="submit" className="mt-6 btn btn-primary">
                 Simpan
               </button>
             </form>

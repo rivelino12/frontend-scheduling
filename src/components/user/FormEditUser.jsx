@@ -98,7 +98,7 @@ const FormEditUser = () => {
                   />
                 </div>
               </div>
-              <button type="submit" className="btn btn-primary">
+              <button type="submit" className="mt-6 btn btn-primary">
                 Simpan
               </button>
             </form>

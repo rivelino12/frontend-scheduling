@@ -30,7 +30,7 @@ const FormAddStudent = () => {
   const fetchParents = async (req, res) => {
     try {
       const response = await axios.get("http://localhost:5000/users");
-      setParents(response.data);
+      setParents(response.data.result);
     } catch (error) {
       console.log(error);
     }
@@ -89,7 +89,7 @@ const FormAddStudent = () => {
                 </select>
               </div>
 
-              <button type="submit" className="btn btn-primary">
+              <button type="submit" className="mt-6 btn btn-primary">
                 Simpan
               </button>
             </form>
