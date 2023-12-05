@@ -7,7 +7,6 @@ const DashboardParent = () => {
   const fetchSchedules = async () => {
     try {
       const response = await axios.get("http://localhost:5000/schedules");
-      console.log(response.data);
       setSchedules(response.data.result);
     } catch (error) {
       console.log(error);

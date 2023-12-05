@@ -7,7 +7,7 @@ import { Accordion, AccordionItem } from "../../components/accordion/Accordion";
 const AddSchedule = () => {
   const [students, setStudents] = useState([]);
   const [studentId, setStudentId] = useState(0);
-  const [class_, setClass_] = useState("");
+  const [class_, setClass_] = useState(Object.values(CLASS)[0]);
   const [schedules, setSchedules] = useState([
     {
       meeting: 1,
@@ -26,7 +26,7 @@ const AddSchedule = () => {
     try {
       const response = await axios.get("http://localhost:5000/students");
       setStudents(response.data.result);
-      console.log(response.data);
+      setStudentId(response.data.result[0].id);
     } catch (error) {
       console.log(error);
     }
@@ -46,7 +46,6 @@ const AddSchedule = () => {
   };
 
   const handleScheduleAdd = () => {
-    // Menentukan nilai meeting untuk pertemuan baru
     const newMeeting = schedules.length + 1;
 
     setSchedules([
@@ -179,7 +178,7 @@ const AddSchedule = () => {
                           <button
                             type="button"
                             onClick={handleScheduleAdd}
-                            className="btn btn-primary"
+                            className="btn"
                           >
                             <span>Tambah</span>
                           </button>
@@ -194,24 +193,6 @@ const AddSchedule = () => {
         </div>
         <div>
           <button className="mt-6 btn btn-primary">Simpan</button>
-        </div>
-        <div className="mt-8 output">
-          <h2 className="text-lg font-bold">Output</h2>
-          {schedules &&
-            schedules.map((singleSchedule, index) => (
-              <ul key={index} className="list-disc list-inside">
-                {singleSchedule.material && (
-                  <li>{`Material: ${singleSchedule.material}`}</li>
-                )}
-                {singleSchedule.date && (
-                  <li>{`Date: ${singleSchedule.date}`}</li>
-                )}
-                {singleSchedule.start && (
-                  <li>{`Start: ${singleSchedule.start}`}</li>
-                )}
-                {singleSchedule.end && <li>{`End: ${singleSchedule.end}`}</li>}
-              </ul>
-            ))}
         </div>
       </form>
     </DefaultLayout>

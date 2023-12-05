@@ -49,7 +49,7 @@ const Login = () => {
               />
               <label className="label">Kata Sandi</label>
               <input
-                type="text"
+                type="password"
                 className="w-full input input-bordered"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
